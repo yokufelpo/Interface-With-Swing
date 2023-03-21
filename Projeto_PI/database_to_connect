@@ -1,0 +1,36 @@
+create database manager_messages;
+use manager_messages;
+create table user(
+    id int primary key auto_increment,
+    username varchar(25) unique not null,
+    password varchar(25) not null
+);
+
+create table contact(
+    id int primary key auto_increment,
+    contactname    varchar(30) not null,
+    id_current int,
+    id_contact int,
+    
+    foreign key(id_current)
+    references user(id)
+    on update cascade
+    on delete cascade,
+    
+    foreign key(id_contact)
+    references user(id)
+    on update cascade
+    on delete cascade
+);
+
+
+create table messages(
+    id int primary key auto_increment,
+    message varchar(255) not null,
+    id_cont int,
+    
+    foreign key(id_cont)
+    references contact(id)
+    on update cascade
+    on delete cascade
+);
